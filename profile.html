@@ -1,0 +1,48 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile · Myinstants</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar"><!-- sidebar --></aside>
+    
+    <main class="main-content">
+      <div class="profile-header">
+        <img src="assets/avatar-placeholder.jpg" class="profile-avatar">
+        <div class="profile-info">
+          <h1>Username</h1>
+          <p>Member since January 2024</p>
+          <div class="profile-stats">
+            <div class="stat">
+              <span class="stat-value">24</span>
+              <span class="stat-label">Uploads</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value">156</span>
+              <span class="stat-label">Favorites</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value">12.5K</span>
+              <span class="stat-label">Total Plays</span>
+            </div>
+          </div>
+        </div>
+        <button class="btn-secondary">Edit Profile</button>
+      </div>
+      
+      <div class="profile-tabs">
+        <button class="tab active" onclick="switchTab('uploads')">My Uploads</button>
+        <button class="tab" onclick="switchTab('favorites')">Favorites</button>
+        <button class="tab" onclick="switchTab('history')">Play History</button>
+      </div>
+      
+      <div id="tabContent" class="sound-grid">
+        <!-- Dynamic content based on selected tab -->
+      </div>
+    </main>
+  </div>
+</body>
+</html>
