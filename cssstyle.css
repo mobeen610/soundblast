@@ -1,3 +1,37 @@
+
+/* EXACT MYINSTANTS BUTTON - 100% match */
+.play-btn {
+  width: 34px;
+  height: 34px;
+  background: #e0e7ff;      /* Light blue-gray like Myinstants */
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+
+.play-btn i { 
+  color: #2563eb;           /* Blue icon, not white */
+  font-size: 0.9rem; 
+}
+
+.play-btn:hover { 
+  background: #c7d2fe;      /* Slightly darker on hover */
+  transform: scale(1.02); 
+}
+
+.play-btn.playing { 
+  background: #2563eb;      /* Blue background when playing */
+}
+
+.play-btn.playing i { 
+  color: white;             /* White icon when playing */
+}
+
 /* Complete styling for all pages */
 :root {
   --primary: #2563eb;
