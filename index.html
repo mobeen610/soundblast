@@ -7,341 +7,65 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #f5f7fb;
-      color: #1e1e2a;
-    }
-
-    .app-wrapper {
-      display: flex;
-      min-height: 100vh;
-    }
-
-    /* SIDEBAR */
-    .sidebar {
-      width: 260px;
-      background: white;
-      border-right: 1px solid #e8ecf3;
-      padding: 20px 12px;
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      overflow-y: auto;
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      padding: 8px 12px 20px;
-      color: #1a1a2e;
-    }
-
-    .nav-section {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      margin-bottom: 16px;
-    }
-
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 14px;
-      border-radius: 8px;
-      color: #4a4a6a;
-      font-weight: 500;
-      font-size: 0.95rem;
-      cursor: default;
-    }
-
-    .nav-item i {
-      width: 20px;
-      color: #7c7c9e;
-    }
-
-    .nav-item:hover {
-      background: #f0f3fd;
-    }
-
-    .nav-item.active {
-      background: #e8eeff;
-      color: #2563eb;
-    }
-
-    .nav-divider {
-      height: 1px;
-      background: #e8ecf3;
-      margin: 12px 0;
-    }
-
-    .upload-btn {
-      background: #1a1a2e;
-      color: white;
-      border: none;
-      border-radius: 40px;
-      padding: 12px 16px;
-      font-weight: 600;
-      margin: 8px 0;
-      cursor: default;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .install-app {
-      margin-top: auto;
-      padding: 20px 8px 8px;
-      color: #6b6b8e;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #f5f7fb; color: #1e1e2a; }
+    .app-wrapper { display: flex; min-height: 100vh; }
+    
+    /* SIDEBAR - Exact Myinstants style */
+    .sidebar { width: 260px; background: white; border-right: 1px solid #e8ecf3; padding: 20px 12px; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+    .logo { font-size: 1.5rem; font-weight: 700; padding: 8px 12px 20px; color: #1a1a2e; }
+    .nav-section { display: flex; flex-direction: column; gap: 2px; margin-bottom: 16px; }
+    .nav-item { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 8px; color: #4a4a6a; font-weight: 500; font-size: 0.95rem; cursor: pointer; }
+    .nav-item i { width: 20px; color: #7c7c9e; }
+    .nav-item:hover { background: #f0f3fd; }
+    .nav-item.active { background: #e8eeff; color: #2563eb; }
+    .nav-divider { height: 1px; background: #e8ecf3; margin: 12px 0; }
+    .upload-btn { background: #1a1a2e; color: white; border: none; border-radius: 40px; padding: 12px 16px; font-weight: 600; margin: 8px 0; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .install-app { margin-top: auto; padding: 20px 8px 8px; color: #6b6b8e; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+    
     /* MAIN CONTENT */
-    .main-content {
-      flex: 1;
-      padding: 24px 32px;
-    }
-
-    .top-bar {
-      display: flex;
-      justify-content: flex-end;
-      margin-bottom: 16px;
-    }
-
-    .user-icons {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-    }
-
-    .user-icons i {
-      font-size: 1.3rem;
-      color: #4a4a6e;
-      background: white;
-      padding: 8px;
-      border-radius: 50%;
-      cursor: default;
-    }
-
-    .install-btn {
-      background: #1a1a2e;
-      color: white;
-      border: none;
-      padding: 8px 18px;
-      border-radius: 40px;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: default;
-    }
-
-    .breadcrumb {
-      color: #7c7c9e;
-      font-size: 0.9rem;
-      margin-bottom: 8px;
-    }
-
-    .page-title {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 24px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .page-title i {
-      color: #f59e0b;
-    }
-
-    .category-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 28px;
-      border-bottom: 1px solid #e2e8f0;
-      padding-bottom: 16px;
-    }
-
-    .category-chip {
-      background: white;
-      padding: 6px 16px;
-      border-radius: 40px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: #3d3d60;
-      border: 1px solid #e8ecf3;
-      cursor: default;
-    }
-
-    /* Sound Grid */
-    .sound-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 16px;
-    }
-
-    .sound-card {
-      background: white;
-      border-radius: 16px;
-      padding: 20px 16px;
-      border: 1px solid #eaecf3;
-      text-align: center;
-      transition: all 0.15s;
-    }
-
-    .sound-card:hover {
-      box-shadow: 0 6px 14px rgba(0,0,0,0.04);
-      border-color: #d0d9f0;
-    }
-
-    .sound-name {
-      font-weight: 700;
-      font-size: 0.95rem;
-      margin-bottom: 16px;
-      word-break: break-word;
-      min-height: 45px;
-    }
-
-    /* BUTTON SHAPES - Circle, Triangle, Square */
-    .play-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin-top: 8px;
-    }
-
-    .play-btn {
-      width: 48px;
-      height: 48px;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-      font-size: 1.2rem;
-    }
-
-    /* Circle button */
-    .play-btn.circle {
-      background: #ef4444;
-      color: white;
-      border-radius: 50%;
-    }
-
-    .play-btn.circle:hover {
-      background: #dc2626;
-      transform: scale(1.1);
-    }
-
-    /* Triangle button */
-    .play-btn.triangle {
-      background: #10b981;
-      color: white;
-      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-      width: 52px;
-      height: 48px;
-      padding-top: 8px;
-    }
-
-    .play-btn.triangle:hover {
-      background: #059669;
-      transform: scale(1.1);
-    }
-
-    .play-btn.triangle i {
-      transform: rotate(180deg);
-      margin-top: -8px;
-    }
-
-    /* Square button */
-    .play-btn.square {
-      background: #3b82f6;
-      color: white;
-      border-radius: 8px;
-    }
-
-    .play-btn.square:hover {
-      background: #2563eb;
-      transform: scale(1.1);
-    }
-
-    /* Playing state */
-    .play-btn.playing {
-      animation: pulse 1s infinite;
-      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.7; }
-    }
-
-    .sound-meta {
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      margin-top: 14px;
-      font-size: 0.75rem;
-      color: #8a8aa8;
-    }
-
-    .footer-note {
-      margin-top: 48px;
-      text-align: center;
-      color: #9090b0;
-      font-size: 0.85rem;
-      border-top: 1px solid #e2e8f0;
-      padding-top: 24px;
-    }
-
-    .footer-note a {
-      color: #2563eb;
-      text-decoration: none;
-    }
-
-    /* Audio element hidden */
-    .audio-player {
-      display: none;
-    }
-
-    @media (max-width: 768px) {
-      .app-wrapper { flex-direction: column; }
-      .sidebar { width: 100%; height: auto; position: static; }
-      .main-content { padding: 16px; }
-      .sound-grid { grid-template-columns: repeat(2, 1fr); }
-    }
+    .main-content { flex: 1; padding: 24px 32px; }
+    .top-bar { display: flex; justify-content: flex-end; margin-bottom: 16px; }
+    .user-icons { display: flex; gap: 16px; align-items: center; }
+    .user-icons i { font-size: 1.3rem; color: #4a4a6e; background: white; padding: 8px; border-radius: 50%; cursor: pointer; }
+    .install-btn { background: #1a1a2e; color: white; border: none; padding: 8px 18px; border-radius: 40px; font-weight: 500; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+    .breadcrumb { color: #7c7c9e; font-size: 0.9rem; margin-bottom: 8px; }
+    .page-title { font-size: 2rem; font-weight: 700; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+    .page-title i { color: #f59e0b; }
+    
+    /* CATEGORY CHIPS */
+    .category-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 28px; border-bottom: 1px solid #e2e8f0; padding-bottom: 16px; }
+    .category-chip { background: white; padding: 6px 16px; border-radius: 40px; font-size: 0.85rem; font-weight: 500; color: #3d3d60; border: 1px solid #e8ecf3; cursor: pointer; }
+    
+    /* SOUND GRID - Matching Myinstants exactly */
+    .sound-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
+    .sound-card { background: white; border-radius: 14px; padding: 18px 12px 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); border: 1px solid #eaecf3; text-align: center; transition: all 0.15s; }
+    .sound-card:hover { box-shadow: 0 6px 14px rgba(0,0,0,0.04); border-color: #d0d9f0; }
+    .sound-icon { background: #f0f5ff; width: 52px; height: 52px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; color: #2563eb; font-size: 1.5rem; }
+    .sound-name { font-weight: 700; font-size: 0.9rem; line-height: 1.3; margin-bottom: 12px; word-break: break-word; color: #1e1e32; min-height: 40px; }
+    
+    /* PLAY BUTTON - Exactly like Myinstants */
+    .play-btn { background: #2563eb; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; transition: all 0.15s; }
+    .play-btn:hover { background: #1d4ed8; transform: scale(1.05); }
+    .play-btn.playing { background: #10b981; animation: pulse 1s infinite; }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+    
+    .sound-meta { font-size: 0.7rem; color: #8a8aa8; display: flex; justify-content: center; gap: 14px; }
+    .footer-note { margin-top: 48px; text-align: center; color: #9090b0; font-size: 0.85rem; border-top: 1px solid #e2e8f0; padding-top: 24px; }
+    audio { display: none; }
   </style>
 </head>
 <body>
 <div class="app-wrapper">
   <!-- SIDEBAR -->
   <div class="sidebar">
-    <div class="logo">
-      <i class="fas fa-bolt"></i> Myinstants
-    </div>
-    
+    <div class="logo"><i class="fas fa-bolt"></i> Myinstants</div>
     <div class="nav-section">
       <div class="nav-item active"><i class="fas fa-home"></i> Home</div>
       <div class="nav-item"><i class="fas fa-clock"></i> Just added</div>
       <div class="nav-item"><i class="fas fa-th-large"></i> Categories</div>
     </div>
-
     <div class="nav-divider"></div>
-
     <div class="nav-section">
       <div class="nav-item"><i class="fas fa-dragon"></i> Anime & Manga</div>
       <div class="nav-item"><i class="fas fa-gamepad"></i> Games</div>
@@ -358,11 +82,8 @@
       <div class="nav-item"><i class="fas fa-fire"></i> Viral</div>
       <div class="nav-item"><i class="fab fa-whatsapp"></i> Whatsapp Audios</div>
     </div>
-
     <div class="nav-divider"></div>
-
     <button class="upload-btn"><i class="fas fa-cloud-upload-alt"></i> Upload</button>
-
     <div class="nav-section">
       <div class="nav-item"><i class="fas fa-sign-in-alt"></i> Login</div>
       <div class="nav-item"><i class="fas fa-heart"></i> Favorites</div>
@@ -371,10 +92,7 @@
       <div class="nav-item"><i class="fas fa-cog"></i> Settings</div>
       <div class="nav-item"><i class="fas fa-sign-out-alt"></i> Logout</div>
     </div>
-
-    <div class="install-app">
-      <i class="fas fa-download"></i> Install app
-    </div>
+    <div class="install-app"><i class="fas fa-download"></i> Install app</div>
   </div>
 
   <!-- MAIN CONTENT -->
@@ -386,16 +104,11 @@
         <span class="install-btn"><i class="fas fa-download"></i> Install app</span>
       </div>
     </div>
-
     <div class="breadcrumb">
       <span>Myinstants</span> <i class="fas fa-chevron-right" style="font-size: 10px; margin: 0 6px;"></i>
       <span style="font-weight: 500;">Trending in Pakistan</span>
     </div>
-
-    <div class="page-title">
-      <i class="fas fa-fire"></i> Trending in Pakistan 🇵🇰
-    </div>
-
+    <div class="page-title"><i class="fas fa-fire"></i> Trending in Pakistan 🇵🇰</div>
     <div class="category-row">
       <span class="category-chip"><i class="fas fa-gamepad"></i> Games</span>
       <span class="category-chip"><i class="fas fa-laugh-squint"></i> Memes</span>
@@ -412,150 +125,83 @@
       <span class="category-chip"><i class="fab fa-whatsapp"></i> Whatsapp Audios</span>
     </div>
 
-    <!-- Sound Grid with Circle, Triangle, Square buttons -->
+    <!-- SOUND GRID -->
     <div class="sound-grid" id="soundGrid"></div>
-
-    <!-- Hidden audio element -->
-    <audio id="globalAudio" class="audio-player"></audio>
-
-    <div class="footer-note">
-      Built by <a href="https://github.com/mobeen610">mobeen610</a>
-    </div>
+    <audio id="audioPlayer"></audio>
+    <div class="footer-note">Built by <a href="https://github.com/mobeen610">mobeen610</a></div>
   </div>
 </div>
 
 <script>
-  // Sound list from Myinstants Pakistan
+  // ============================================
+  // REPLACE THESE URLs WITH YOUR ACTUAL FILES
+  // ============================================
   const sounds = [
-    "FAHHHHHHHHHHHHHH", "FAAAH", "Chicken on tree screaming", "VINE BOOM SOUND",
-    "anime ahh", "GopGopGop", "Fart", "Tum Dum Tedau", "Fahhh",
-    "Among Us role reveal sound", "Anime Wow", "Mka ladle meow gop.",
-    "Matlab wo alag hi level ka banda tha", "Bhosdike madarchod been k loray - roadies",
-    "CID LE MDC", "Chalo", "romanceeeeeeeeeeeeee", "I've Got This FAAAAAAAAAHHHHH",
-    "Sad Violin (the meme one)", "Dexter meme", "Lund pakad ke tarazu ki tarah cid",
-    "teri gand mari", "Ab tu Gaya beta ab dekh tu (puneet", "sparrowusa24 ouch",
-    "rizz sound effect", "Acha ji aisa hai kya", "Bone Crack", "spiderman meme song",
-    "dun dun dunnnnnnnn", "HAha funny laugh", "ma ka bhosda aag", "Shocked sound",
-    "CID", "Aisa mat karo", "Kya aap lete lete", "Tuco: GET OUT"
+    { name: "FAHHHHHHHHHHHHHH", file: "fahhhhh.mp3" },
+    { name: "FAAAH", file: "faaah.mp3" },
+    { name: "Chicken on tree screaming", file: "chicken-tree.mp3" },
+    { name: "VINE BOOM SOUND", file: "vine-boom.mp3" },
+    { name: "anime ahh", file: "anime-ahh.mp3" },
+    { name: "GopGopGop", file: "gopgopgop.mp3" },
+    { name: "Fart", file: "fart.mp3" },
+    { name: "Tum Dum Tedau", file: "tum-dum.mp3" },
+    { name: "Fahhh", file: "fahhh-short.mp3" },
+    { name: "Among Us role reveal sound", file: "among-us.mp3" },
+    { name: "Anime Wow", file: "anime-wow.mp3" },
+    { name: "Mka ladle meow gop.", file: "mka-ladle.mp3" },
+    { name: "Sad Violin (the meme one)", file: "sad-violin.mp3" },
+    { name: "Bone Crack", file: "bone-crack.mp3" },
+    { name: "Shocked sound", file: "shocked.mp3" },
+    { name: "Tuco: GET OUT", file: "tuco.mp3" }
   ];
 
-  // Sample voice/sound URLs (using Web Audio API to generate speech-like sounds)
-  // For demo, we'll use the Web Speech API to speak the text!
   let currentAudio = null;
   let currentButton = null;
-  let audioContext = null;
 
-  function initAudio() {
-    if (!audioContext) {
-      audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    }
-    if (audioContext.state === 'suspended') {
-      audioContext.resume();
-    }
-  }
-
-  // Use Web Speech API for actual voice!
-  function playWithVoice(text, button) {
-    // Stop any ongoing speech
-    if (window.speechSynthesis) {
-      window.speechSynthesis.cancel();
+  function playSound(fileName, button) {
+    const audio = document.getElementById('audioPlayer');
+    
+    // Stop current audio
+    if (currentAudio) {
+      currentAudio.pause();
+      currentAudio.currentTime = 0;
     }
     
-    // Remove previous playing state
+    // Remove playing state
     if (currentButton) {
       currentButton.classList.remove('playing');
     }
     
-    // Mark new button as playing
+    // Set and play new audio
+    audio.src = `audio/${fileName}`;
+    audio.play();
+    currentAudio = audio;
+    
+    // Mark button as playing
     button.classList.add('playing');
     currentButton = button;
     
-    // Use Speech Synthesis for actual voice
-    if (window.speechSynthesis) {
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'en-US';
-      utterance.rate = 1.2;
-      utterance.pitch = 1.0;
-      utterance.volume = 1;
-      
-      utterance.onend = () => {
-        button.classList.remove('playing');
-        currentButton = null;
-      };
-      
-      utterance.onerror = () => {
-        button.classList.remove('playing');
-        currentButton = null;
-      };
-      
-      window.speechSynthesis.speak(utterance);
-    } else {
-      // Fallback to beep if speech not supported
-      playBeepSound(text, button);
-    }
-  }
-
-  // Fallback beep sound
-  function playBeepSound(text, button) {
-    initAudio();
-    if (!audioContext) return;
-    
-    if (currentButton) {
-      currentButton.classList.remove('playing');
-    }
-    
-    button.classList.add('playing');
-    currentButton = button;
-    
-    const osc = audioContext.createOscillator();
-    const gain = audioContext.createGain();
-    
-    let hash = 0;
-    for (let i = 0; i < text.length; i++) {
-      hash = ((hash << 5) - hash) + text.charCodeAt(i);
-    }
-    
-    osc.frequency.value = 400 + Math.abs(hash % 400);
-    osc.type = 'triangle';
-    
-    gain.gain.setValueAtTime(0.15, audioContext.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.5);
-    
-    osc.connect(gain);
-    gain.connect(audioContext.destination);
-    
-    osc.start();
-    osc.stop(audioContext.currentTime + 0.5);
-    
-    setTimeout(() => {
+    audio.onended = () => {
       button.classList.remove('playing');
       currentButton = null;
-    }, 500);
+    };
   }
 
   function renderGrid() {
     const grid = document.getElementById('soundGrid');
     
     let html = '';
-    sounds.forEach((name, index) => {
-      const plays = Math.floor(Math.random() * 5000) + 500;
-      const likes = Math.floor(Math.random() * 300) + 20;
-      
-      // Alternate button shapes
-      const shapeClass = index % 3 === 0 ? 'circle' : index % 3 === 1 ? 'triangle' : 'square';
-      const icon = shapeClass === 'circle' ? 'fa-play' : shapeClass === 'triangle' ? 'fa-play' : 'fa-stop';
-      
+    sounds.forEach((sound) => {
       html += `
         <div class="sound-card">
-          <div class="sound-name">${name}</div>
-          <div class="play-buttons">
-            <button class="play-btn ${shapeClass}" data-sound="${name.replace(/"/g, '&quot;')}">
-              <i class="fas ${icon}"></i>
-            </button>
-          </div>
+          <div class="sound-icon"><i class="fas fa-volume-up"></i></div>
+          <div class="sound-name">${sound.name}</div>
+          <button class="play-btn" data-file="${sound.file}">
+            <i class="fas fa-play"></i>
+          </button>
           <div class="sound-meta">
-            <span><i class="far fa-play-circle"></i> ${plays}</span>
-            <span><i class="far fa-heart"></i> ${likes}</span>
+            <span><i class="far fa-play-circle"></i> 1.2k</span>
+            <span><i class="far fa-heart"></i> 89</span>
           </div>
         </div>
       `;
@@ -563,22 +209,13 @@
     
     grid.innerHTML = html;
     
-    // Add click handlers
     document.querySelectorAll('.play-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
-        const soundName = btn.dataset.sound;
-        
-        // Use Web Speech API for actual voice!
-        playWithVoice(soundName, btn);
+        playSound(btn.dataset.file, btn);
       });
     });
   }
-
-  // Enable audio on first interaction
-  document.body.addEventListener('click', () => {
-    initAudio();
-  }, { once: true });
 
   renderGrid();
 </script>
