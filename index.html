@@ -3,189 +3,563 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SoundBlast 🔊 Trending Sounds</title>
+  <title>SoundBlast · Trending Funny Sounds of Pakistan</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; background: #f8faff; }
-    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f5f7fb;
+      color: #1e1e2a;
+      line-height: 1.5;
+    }
+
+    .app-wrapper {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ----- SIDEBAR (matching Myinstants) ----- */
+    .sidebar {
+      width: 260px;
+      background: white;
+      border-right: 1px solid #e2e4ed;
+      padding: 20px 12px;
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 700;
+      padding: 8px 12px 20px;
+      color: #1e1e2a;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .logo i {
+      color: #2563eb;
+    }
+
+    .nav-section {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-bottom: 16px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      color: #3a3a5c;
+      font-weight: 500;
+      font-size: 0.95rem;
+      cursor: default;
+      transition: background 0.1s;
+    }
+
+    .nav-item i {
+      width: 20px;
+      color: #6f6f9a;
+      font-size: 1.1rem;
+    }
+
+    .nav-item:hover {
+      background: #f0f3fd;
+    }
+
+    .nav-item.active {
+      background: #e0e7ff;
+      color: #2563eb;
+    }
+
+    .nav-divider {
+      height: 1px;
+      background: #eef0f8;
+      margin: 12px 0;
+    }
+
+    .upload-btn {
+      background: #1e1e2a;
+      color: white;
+      border: none;
+      border-radius: 40px;
+      padding: 12px 16px;
+      font-weight: 600;
+      margin: 8px 0;
+      cursor: default;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .install-app {
+      margin-top: auto;
+      padding: 16px 8px 8px;
+      color: #5b5b7a;
+      font-weight: 500;
+      font-size: 0.9rem;
+      cursor: default;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ----- MAIN CONTENT ----- */
+    .main-content {
+      flex: 1;
+      padding: 24px 32px 40px;
+      max-width: calc(100% - 260px);
+    }
+
+    /* header */
+    .top-header {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .user-actions {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .user-actions i {
+      font-size: 1.3rem;
+      color: #3f3f6e;
+      background: white;
+      padding: 8px;
+      border-radius: 50%;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+      cursor: default;
+    }
+
+    .install-btn {
+      background: #1e1e2a;
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 40px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: default;
+    }
+
+    /* breadcrumb */
+    .breadcrumb {
+      color: #6a6a8b;
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .breadcrumb i {
+      font-size: 10px;
+    }
+
+    .page-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* category chips */
+    .category-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 28px;
+      border-bottom: 1px solid #e2e4ed;
+      padding-bottom: 16px;
+    }
+
+    .cat-chip {
+      background: white;
+      padding: 6px 16px;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #2d2d44;
+      border: 1px solid #eef0f5;
+      cursor: default;
+      white-space: nowrap;
+    }
+
+    .cat-chip i {
+      margin-right: 6px;
+      font-size: 0.75rem;
+      color: #6060a0;
+    }
+
+    /* sound grid - exactly like Myinstants */
     .sound-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 16px;
-      padding: 24px;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 14px;
     }
-    
-    .sound-button {
+
+    .sound-card {
       background: white;
-      border: 2px solid #e2e8f0;
       border-radius: 16px;
-      padding: 20px 16px;
+      padding: 16px 12px 14px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+      border: 1px solid #edeff5;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.15s;
       text-align: center;
-      font-weight: 600;
-      font-size: 1rem;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
     }
-    
-    .sound-button:hover {
-      background: #ff6b35;
+
+    .sound-card:hover {
+      box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+      border-color: #cdd9ff;
+      transform: translateY(-1px);
+    }
+
+    .sound-icon {
+      background: #f0f4ff;
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+      color: #2563eb;
+      font-size: 1.6rem;
+    }
+
+    .sound-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+      line-height: 1.3;
+      margin-bottom: 6px;
+      word-break: break-word;
+      color: #16162c;
+    }
+
+    .sound-meta {
+      font-size: 0.7rem;
+      color: #8c8ca8;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .playing .sound-icon {
+      background: #2563eb;
       color: white;
-      border-color: #ff6b35;
-      transform: scale(1.02);
+      animation: softPulse 1s infinite;
     }
-    
-    .sound-button i {
-      margin-right: 8px;
-      font-size: 1.2rem;
-    }
-    
-    .playing {
-      background: #004e89;
-      color: white;
-      border-color: #004e89;
-      animation: pulse 1s infinite;
-    }
-    
-    @keyframes pulse {
+
+    @keyframes softPulse {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.02); }
+    }
+
+    .footer-note {
+      margin-top: 40px;
+      text-align: center;
+      color: #9090b0;
+      font-size: 0.85rem;
+    }
+
+    .footer-note a {
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    /* responsive */
+    @media (max-width: 700px) {
+      .app-wrapper { flex-direction: column; }
+      .sidebar { width: 100%; height: auto; position: static; }
+      .main-content { max-width: 100%; padding: 16px; }
     }
   </style>
 </head>
 <body>
-  <h1 style="padding: 24px;">🔊 SoundBlast - Trending Sounds</h1>
-  
-  <!-- SOUND BUTTONS - Directly in HTML -->
-  <div class="sound-grid">
-    <button class="sound-button" onclick="playSound('FAHHHHHHHHHHHHHH')">
-      <i class="fas fa-volume-up"></i> FAHHHHHHHHHHHHHH
-    </button>
-    <button class="sound-button" onclick="playSound('FAAAH')">
-      <i class="fas fa-volume-up"></i> FAAAH
-    </button>
-    <button class="sound-button" onclick="playSound('Chicken on tree screaming')">
-      <i class="fas fa-volume-up"></i> Chicken on tree screaming
-    </button>
-    <button class="sound-button" onclick="playSound('VINE BOOM SOUND')">
-      <i class="fas fa-volume-up"></i> VINE BOOM SOUND
-    </button>
-    <button class="sound-button" onclick="playSound('anime ahh')">
-      <i class="fas fa-volume-up"></i> anime ahh
-    </button>
-    <button class="sound-button" onclick="playSound('GopGopGop')">
-      <i class="fas fa-volume-up"></i> GopGopGop
-    </button>
-    <button class="sound-button" onclick="playSound('Fart')">
-      <i class="fas fa-volume-up"></i> Fart
-    </button>
-    <button class="sound-button" onclick="playSound('Anime Wow')">
-      <i class="fas fa-volume-up"></i> Anime Wow
-    </button>
-    <button class="sound-button" onclick="playSound('Tum Dum Tedau')">
-      <i class="fas fa-volume-up"></i> Tum Dum Tedau
-    </button>
-    <button class="sound-button" onclick="playSound('Among Us role reveal sound')">
-      <i class="fas fa-volume-up"></i> Among Us role reveal
-    </button>
-    <button class="sound-button" onclick="playSound('Sad Violin (the meme one)')">
-      <i class="fas fa-volume-up"></i> Sad Violin
-    </button>
-    <button class="sound-button" onclick="playSound('Bone Crack')">
-      <i class="fas fa-volume-up"></i> Bone Crack
-    </button>
-    <button class="sound-button" onclick="playSound('SpongeBob Fail')">
-      <i class="fas fa-volume-up"></i> SpongeBob Fail
-    </button>
-    <button class="sound-button" onclick="playSound('Shocked sound')">
-      <i class="fas fa-volume-up"></i> Shocked sound
-    </button>
-    <button class="sound-button" onclick="playSound('Tuco: GET OUT')">
-      <i class="fas fa-volume-up"></i> Tuco: GET OUT
-    </button>
-    <button class="sound-button" onclick="playSound('HAha funny laugh')">
-      <i class="fas fa-volume-up"></i> HAha funny laugh
-    </button>
+<div class="app-wrapper">
+  <!-- SIDEBAR - matches Myinstants exactly -->
+  <div class="sidebar">
+    <div class="logo">
+      <i class="fas fa-bolt"></i> SoundBlast
+    </div>
+    
+    <div class="nav-section">
+      <div class="nav-item active"><i class="fas fa-home"></i> Home</div>
+      <div class="nav-item"><i class="fas fa-clock"></i> Just added</div>
+      <div class="nav-item"><i class="fas fa-th-large"></i> Categories</div>
+    </div>
+
+    <div class="nav-divider"></div>
+
+    <div class="nav-section">
+      <div class="nav-item"><i class="fas fa-dragon"></i> Anime & Manga</div>
+      <div class="nav-item"><i class="fas fa-gamepad"></i> Games</div>
+      <div class="nav-item"><i class="fas fa-laugh-squint"></i> Memes</div>
+      <div class="nav-item"><i class="fas fa-film"></i> Movies</div>
+      <div class="nav-item"><i class="fas fa-music"></i> Music</div>
+      <div class="nav-item"><i class="fas fa-landmark"></i> Politics</div>
+      <div class="nav-item"><i class="fas fa-hand-peace"></i> Pranks</div>
+      <div class="nav-item"><i class="fas fa-face-smile"></i> Reactions</div>
+      <div class="nav-item"><i class="fas fa-volume-high"></i> Sound Effects</div>
+      <div class="nav-item"><i class="fas fa-futbol"></i> Sports</div>
+      <div class="nav-item"><i class="fas fa-tv"></i> Television</div>
+      <div class="nav-item"><i class="fab fa-tiktok"></i> Tiktok Trends</div>
+      <div class="nav-item"><i class="fas fa-fire"></i> Viral</div>
+      <div class="nav-item"><i class="fab fa-whatsapp"></i> Whatsapp Audios</div>
+    </div>
+
+    <div class="nav-divider"></div>
+
+    <button class="upload-btn"><i class="fas fa-cloud-upload-alt"></i> Upload</button>
+
+    <div class="nav-section">
+      <div class="nav-item"><i class="fas fa-sign-in-alt"></i> Login</div>
+      <div class="nav-item"><i class="fas fa-heart"></i> Favorites</div>
+      <div class="nav-item"><i class="fas fa-history"></i> Uploaded</div>
+      <div class="nav-item"><i class="fas fa-user"></i> Profile</div>
+      <div class="nav-item"><i class="fas fa-cog"></i> Settings</div>
+      <div class="nav-item"><i class="fas fa-sign-out-alt"></i> Logout</div>
+    </div>
+
+    <div class="install-app">
+      <i class="fas fa-download"></i> Install app
+    </div>
   </div>
 
-  <script>
-    let audioContext = null;
-    let currentSource = null;
-    let currentButton = null;
-    
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <!-- top header with install & profile -->
+    <div class="top-header">
+      <div class="user-actions">
+        <i class="fas fa-user-circle"></i>
+        <i class="fas fa-cog"></i>
+        <span class="install-btn"><i class="fas fa-download"></i> Install app</span>
+      </div>
+    </div>
+
+    <!-- breadcrumb -->
+    <div class="breadcrumb">
+      <span>SoundBlast</span>
+      <i class="fas fa-chevron-right"></i>
+      <span style="font-weight: 500; color:#1e1e2a;">Trending in Pakistan</span>
+    </div>
+
+    <!-- page title -->
+    <div class="page-title">
+      <i class="fas fa-fire" style="color: #f97316;"></i>
+      Trending in Pakistan 🇵🇰
+    </div>
+
+    <!-- category chips (exactly like reference) -->
+    <div class="category-strip">
+      <span class="cat-chip"><i class="fas fa-gamepad"></i> Games</span>
+      <span class="cat-chip"><i class="fas fa-laugh-squint"></i> Memes</span>
+      <span class="cat-chip"><i class="fas fa-film"></i> Movies</span>
+      <span class="cat-chip"><i class="fas fa-music"></i> Music</span>
+      <span class="cat-chip"><i class="fas fa-users"></i> Politics</span>
+      <span class="cat-chip"><i class="fas fa-hand-peace"></i> Pranks</span>
+      <span class="cat-chip"><i class="fas fa-surprise"></i> Reactions</span>
+      <span class="cat-chip"><i class="fas fa-volume-up"></i> Sound Effects</span>
+      <span class="cat-chip"><i class="fas fa-futbol"></i> Sports</span>
+      <span class="cat-chip"><i class="fas fa-tv"></i> Television</span>
+      <span class="cat-chip"><i class="fab fa-tiktok"></i> Tiktok Trends</span>
+      <span class="cat-chip"><i class="fas fa-video"></i> Viral</span>
+      <span class="cat-chip"><i class="fab fa-whatsapp"></i> Whatsapp Audios</span>
+      <span class="cat-chip"><i class="fas fa-dragon"></i> Anime & Manga</span>
+    </div>
+
+    <!-- SOUND GRID - exact list from myinstants PK trending -->
+    <div class="sound-grid" id="soundGrid"></div>
+
+    <!-- footer credit -->
+    <div class="footer-note">
+      Built by <a href="https://github.com/mobeen610">mobeen610</a> · SoundBlast 🔊
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(){
+    "use strict";
+
+    // EXACT sound list from myinstants.com/en/index/pk/
+    const trendingSounds = [
+      "FAHHHHHHHHHHHHHH",
+      "FAAAH",
+      "Chicken on tree screaming",
+      "VINE BOOM SOUND",
+      "anime ahh",
+      "GopGopGop",
+      "Fart",
+      "Tum Dum Tedau",
+      "Fahhh",
+      "Among Us role reveal sound",
+      "Anime Wow",
+      "Mka ladle meow gop.",
+      "Matlab wo alag hi level ka banda tha",
+      "Bhosdike madarchod been k loray - roadies",
+      "CID LE MDC",
+      "Chalo",
+      "romanceeeeeeeeeeeeee",
+      "I've Got This FAAAAAAAAAHHHHH",
+      "Sad Violin (the meme one)",
+      "Dexter meme",
+      "Lund pakad ke tarazu ki tarah cid",
+      "teri gand mari",
+      "Ab tu Gaya beta ab dekh tu (puneet",
+      "sparrowusa24 ouch",
+      "rizz sound effect",
+      "Acha ji aisa hai kya",
+      "Bone Crack",
+      "spiderman meme song",
+      "dun dun dunnnnnnnn",
+      "HAha funny laugh",
+      "ma ka bhosda aag",
+      "Shocked sound",
+      "CID",
+      "Aisa mat karo",
+      "Kya aap lete lete",
+      "Tuco: GET OUT"
+    ];
+
+    let audioCtx = null;
+    let currentPlayingCard = null;
+
     function initAudio() {
-      if (!audioContext) {
-        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       }
-      if (audioContext.state === 'suspended') {
-        audioContext.resume();
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
       }
     }
-    
-    function playSound(soundName) {
+
+    function playSoundForItem(index, name) {
       initAudio();
-      
-      // Remove playing class from previous button
-      if (currentButton) {
-        currentButton.classList.remove('playing');
+      if (!audioCtx) return;
+
+      // Remove playing state from previous card
+      if (currentPlayingCard) {
+        currentPlayingCard.classList.remove('playing');
       }
-      
-      // Find and highlight current button
-      const buttons = document.querySelectorAll('.sound-button');
-      for (let btn of buttons) {
-        if (btn.textContent.includes(soundName)) {
-          btn.classList.add('playing');
-          currentButton = btn;
-          break;
-        }
-      }
-      
-      // Stop any currently playing sound
-      if (currentSource) {
-        try { currentSource.stop(); } catch(e) {}
-      }
-      
-      // Create unique sound based on name
-      const osc = audioContext.createOscillator();
-      const gain = audioContext.createGain();
-      
-      // Generate frequency from sound name
+
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      // Create distinct sound per name
       let hash = 0;
-      for (let i = 0; i < soundName.length; i++) {
-        hash = ((hash << 5) - hash) + soundName.charCodeAt(i);
+      for (let i = 0; i < name.length; i++) {
+        hash = ((hash << 5) - hash) + name.charCodeAt(i);
       }
-      const frequency = 300 + Math.abs(hash % 500);
+      const baseFreq = 350 + Math.abs(hash % 500);
       
-      osc.frequency.value = frequency;
-      osc.type = ['sawtooth', 'triangle', 'square'][Math.abs(hash) % 3];
-      
-      gain.gain.setValueAtTime(0.2, audioContext.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.4);
-      
+      osc.type = ['triangle', 'sawtooth', 'square'][Math.abs(hash) % 3];
+      osc.frequency.value = baseFreq;
+
+      gain.gain.setValueAtTime(0.15, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+
       osc.connect(gain);
-      gain.connect(audioContext.destination);
-      
+      gain.connect(audioCtx.destination);
+
       osc.start();
-      currentSource = osc;
-      osc.stop(audioContext.currentTime + 0.4);
-      
-      // Remove playing class after sound ends
-      setTimeout(() => {
-        if (currentButton) {
-          currentButton.classList.remove('playing');
-          currentButton = null;
-        }
-      }, 400);
-    }
-    
-    // Enable audio on first click
-    document.addEventListener('click', () => {
-      if (audioContext && audioContext.state === 'suspended') {
-        audioContext.resume();
+      osc.stop(now + 0.4);
+
+      // Mark card as playing
+      const card = document.querySelector(`.sound-card[data-index="${index}"]`);
+      if (card) {
+        card.classList.add('playing');
+        currentPlayingCard = card;
+        setTimeout(() => {
+          card.classList.remove('playing');
+          if (currentPlayingCard === card) currentPlayingCard = null;
+        }, 450);
       }
+    }
+
+    function renderGrid() {
+      const grid = document.getElementById('soundGrid');
+      
+      let html = '';
+      trendingSounds.forEach((name, idx) => {
+        // Pick icon based on sound name
+        let icon = 'fa-volume-up';
+        const lower = name.toLowerCase();
+        if (lower.includes('fart')) icon = 'fa-poop';
+        else if (lower.includes('vine')) icon = 'fa-bomb';
+        else if (lower.includes('anime') || lower.includes('ahh')) icon = 'fa-dragon';
+        else if (lower.includes('chicken')) icon = 'fa-kiwi-bird';
+        else if (lower.includes('sad')) icon = 'fa-sad-tear';
+        else if (lower.includes('wow')) icon = 'fa-face-surprise';
+        else if (lower.includes('bone')) icon = 'fa-bone';
+        else if (lower.includes('spider')) icon = 'fa-spider';
+        else if (lower.includes('shocked')) icon = 'fa-flushed';
+        else if (lower.includes('tuco')) icon = 'fa-skull';
+        else if (lower.includes('dexter')) icon = 'fa-flask';
+        
+        html += `
+          <div class="sound-card" data-index="${idx}" data-name="${name.replace(/"/g, '&quot;')}">
+            <div class="sound-icon">
+              <i class="fas ${icon}"></i>
+            </div>
+            <div class="sound-name">${name}</div>
+            <div class="sound-meta">
+              <span><i class="far fa-play-circle"></i> ${Math.floor(Math.random()*2000+300)}</span>
+              <span><i class="far fa-heart"></i> ${Math.floor(Math.random()*150+10)}</span>
+            </div>
+          </div>
+        `;
+      });
+      
+      grid.innerHTML = html;
+
+      // Attach click listeners
+      document.querySelectorAll('.sound-card').forEach(card => {
+        card.addEventListener('click', function(e) {
+          const index = this.dataset.index;
+          const name = this.dataset.name;
+          if (index !== undefined) {
+            playSoundForItem(parseInt(index), name);
+          }
+        });
+      });
+    }
+
+    // Enable audio on first interaction
+    document.body.addEventListener('click', function wakeAudio() {
+      initAudio();
+      document.body.removeEventListener('click', wakeAudio);
     }, { once: true });
-  </script>
+
+    renderGrid();
+  })();
+</script>
 </body>
 </html>
