@@ -131,7 +131,6 @@
       max-width: calc(100% - 260px);
     }
 
-    /* Top bar with user actions */
     .top-bar {
       display: flex;
       justify-content: flex-end;
@@ -169,7 +168,6 @@
       cursor: default;
     }
 
-    /* Breadcrumb */
     .breadcrumb {
       color: #7c7c9e;
       font-size: 0.9rem;
@@ -184,7 +182,6 @@
       color: #a0a0be;
     }
 
-    /* Page title */
     .page-title {
       font-size: 2rem;
       font-weight: 700;
@@ -199,7 +196,6 @@
       color: #f59e0b;
     }
 
-    /* Category chips row */
     .category-row {
       display: flex;
       flex-wrap: wrap;
@@ -227,7 +223,7 @@
       color: #6b6b8e;
     }
 
-    /* Sound grid - exactly like Myinstants */
+    /* Sound grid */
     .sound-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
@@ -240,14 +236,19 @@
       padding: 18px 12px 14px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.02);
       border: 1px solid #eaecf3;
-      cursor: default;
-      transition: box-shadow 0.15s, border-color 0.15s;
+      cursor: pointer;
+      transition: all 0.15s;
       text-align: center;
     }
 
     .sound-card:hover {
       box-shadow: 0 6px 14px rgba(0,0,0,0.04);
       border-color: #d0d9f0;
+    }
+
+    .sound-card.playing {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
     }
 
     .sound-icon {
@@ -261,6 +262,18 @@
       margin: 0 auto 12px;
       color: #2563eb;
       font-size: 1.5rem;
+      transition: all 0.15s;
+    }
+
+    .sound-card.playing .sound-icon {
+      background: #2563eb;
+      color: white;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
     }
 
     .sound-name {
@@ -285,7 +298,6 @@
       font-size: 0.65rem;
     }
 
-    /* Footer */
     .footer-note {
       margin-top: 48px;
       text-align: center;
@@ -300,7 +312,6 @@
       text-decoration: none;
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
       .app-wrapper { flex-direction: column; }
       .sidebar { width: 100%; height: auto; position: static; }
@@ -315,7 +326,6 @@
 </head>
 <body>
 <div class="app-wrapper">
-  <!-- SIDEBAR - Identical to Myinstants -->
   <div class="sidebar">
     <div class="logo">
       <i class="fas fa-bolt"></i> Myinstants
@@ -364,9 +374,7 @@
     </div>
   </div>
 
-  <!-- MAIN CONTENT -->
   <div class="main-content">
-    <!-- Top bar -->
     <div class="top-bar">
       <div class="user-icons">
         <i class="fas fa-user-circle"></i>
@@ -375,20 +383,17 @@
       </div>
     </div>
 
-    <!-- Breadcrumb -->
     <div class="breadcrumb">
       <span>Myinstants</span>
       <i class="fas fa-chevron-right"></i>
       <span style="font-weight: 500; color:#1e1e2a;">Trending in Pakistan</span>
     </div>
 
-    <!-- Page title -->
     <div class="page-title">
       <i class="fas fa-fire"></i>
       Trending in Pakistan 🇵🇰
     </div>
 
-    <!-- Category chips -->
     <div class="category-row">
       <span class="category-chip"><i class="fas fa-gamepad"></i> Games</span>
       <span class="category-chip"><i class="fas fa-laugh-squint"></i> Memes</span>
@@ -406,10 +411,8 @@
       <span class="category-chip"><i class="fas fa-dragon"></i> Anime & Manga</span>
     </div>
 
-    <!-- Sound grid - exact same sounds as myinstants.com/en/index/pk/ -->
     <div class="sound-grid" id="soundGrid"></div>
 
-    <!-- Footer -->
     <div class="footer-note">
       Built by <a href="https://github.com/mobeen610">mobeen610</a>
     </div>
@@ -417,47 +420,76 @@
 </div>
 
 <script>
-  // EXACT sound list from Myinstants Pakistan trending page
   const sounds = [
-    "FAHHHHHHHHHHHHHH",
-    "FAAAH",
-    "Chicken on tree screaming",
-    "VINE BOOM SOUND",
-    "anime ahh",
-    "GopGopGop",
-    "Fart",
-    "Tum Dum Tedau",
-    "Fahhh",
-    "Among Us role reveal sound",
-    "Anime Wow",
-    "Mka ladle meow gop.",
-    "Matlab wo alag hi level ka banda tha",
-    "Bhosdike madarchod been k loray - roadies",
-    "CID LE MDC",
-    "Chalo",
-    "romanceeeeeeeeeeeeee",
-    "I've Got This FAAAAAAAAAHHHHH",
-    "Sad Violin (the meme one)",
-    "Dexter meme",
-    "Lund pakad ke tarazu ki tarah cid",
-    "teri gand mari",
-    "Ab tu Gaya beta ab dekh tu (puneet",
-    "sparrowusa24 ouch",
-    "rizz sound effect",
-    "Acha ji aisa hai kya",
-    "Bone Crack",
-    "spiderman meme song",
-    "dun dun dunnnnnnnn",
-    "HAha funny laugh",
-    "ma ka bhosda aag",
-    "Shocked sound",
-    "CID",
-    "Aisa mat karo",
-    "Kya aap lete lete",
-    "Tuco: GET OUT",
-    "Ek Gand pe Repta mara n Sarak pe Hagta firega",
-    "SpongeBob Fail"
+    "FAHHHHHHHHHHHHHH", "FAAAH", "Chicken on tree screaming", "VINE BOOM SOUND",
+    "anime ahh", "GopGopGop", "Fart", "Tum Dum Tedau", "Fahhh",
+    "Among Us role reveal sound", "Anime Wow", "Mka ladle meow gop.",
+    "Matlab wo alag hi level ka banda tha", "Bhosdike madarchod been k loray - roadies",
+    "CID LE MDC", "Chalo", "romanceeeeeeeeeeeeee", "I've Got This FAAAAAAAAAHHHHH",
+    "Sad Violin (the meme one)", "Dexter meme", "Lund pakad ke tarazu ki tarah cid",
+    "teri gand mari", "Ab tu Gaya beta ab dekh tu (puneet", "sparrowusa24 ouch",
+    "rizz sound effect", "Acha ji aisa hai kya", "Bone Crack", "spiderman meme song",
+    "dun dun dunnnnnnnn", "HAha funny laugh", "ma ka bhosda aag", "Shocked sound",
+    "CID", "Aisa mat karo", "Kya aap lete lete", "Tuco: GET OUT",
+    "Ek Gand pe Repta mara n Sarak pe Hagta firega", "SpongeBob Fail"
   ];
+
+  let audioCtx = null;
+  let currentCard = null;
+  let currentOsc = null;
+
+  function initAudio() {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+  }
+
+  function playSound(name, card) {
+    initAudio();
+    if (!audioCtx) return;
+
+    // Stop previous sound
+    if (currentOsc) {
+      try { currentOsc.stop(); } catch(e) {}
+    }
+    if (currentCard) {
+      currentCard.classList.remove('playing');
+    }
+
+    // Mark new card as playing
+    card.classList.add('playing');
+    currentCard = card;
+
+    // Generate sound
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) {
+      hash = ((hash << 5) - hash) + name.charCodeAt(i);
+    }
+    
+    osc.frequency.value = 350 + Math.abs(hash % 450);
+    osc.type = ['triangle', 'sawtooth', 'square'][Math.abs(hash) % 3];
+    
+    gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.35);
+    
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    
+    osc.start();
+    currentOsc = osc;
+    osc.stop(audioCtx.currentTime + 0.35);
+
+    setTimeout(() => {
+      card.classList.remove('playing');
+      if (currentCard === card) currentCard = null;
+    }, 400);
+  }
 
   function getIconForSound(name) {
     const lower = name.toLowerCase();
@@ -487,7 +519,7 @@
       const likes = Math.floor(Math.random() * 300) + 20;
       
       html += `
-        <div class="sound-card">
+        <div class="sound-card" data-name="${name.replace(/"/g, '&quot;')}">
           <div class="sound-icon">
             <i class="fas ${icon}"></i>
           </div>
@@ -501,7 +533,22 @@
     });
     
     grid.innerHTML = html;
+
+    // Add click handlers
+    document.querySelectorAll('.sound-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const name = card.dataset.name;
+        playSound(name, card);
+      });
+    });
   }
+
+  // Enable audio on first click anywhere
+  document.body.addEventListener('click', () => {
+    if (audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+  }, { once: true });
 
   renderGrid();
 </script>
