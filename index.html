@@ -10,166 +10,50 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', sans-serif; background: #f5f7fb; color: #1e1e2a; }
     
-    /* TOP MENU BAR - Exactly like Myinstants */
-    .top-menu {
-      background: white;
-      border-bottom: 1px solid #e8ecf3;
-      padding: 12px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #1a1a2e;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    
+    /* TOP MENU */
+    .top-menu { background: white; border-bottom: 1px solid #e8ecf3; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-size: 1.5rem; font-weight: 700; color: #1a1a2e; display: flex; align-items: center; gap: 8px; }
     .logo i { color: #2563eb; }
-    
-    .menu-items {
-      display: flex;
-      gap: 24px;
-      align-items: center;
-    }
-    
-    .menu-item {
-      color: #4a4a6a;
-      font-weight: 500;
-      font-size: 0.95rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    
+    .menu-items { display: flex; gap: 24px; }
+    .menu-item { color: #4a4a6a; font-weight: 500; font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; gap: 6px; }
     .menu-item i { color: #7c7c9e; font-size: 0.9rem; }
     .menu-item:hover { color: #2563eb; }
     .menu-item.active { color: #2563eb; }
-    
-    .user-section {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-    }
-    
-    .upload-btn {
-      background: #1a1a2e;
-      color: white;
-      border: none;
-      border-radius: 40px;
-      padding: 8px 16px;
-      font-weight: 500;
-      font-size: 0.9rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    
-    .install-btn {
-      background: white;
-      color: #1a1a2e;
-      border: 1px solid #e8ecf3;
-      border-radius: 40px;
-      padding: 8px 16px;
-      font-weight: 500;
-      font-size: 0.9rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
+    .user-section { display: flex; gap: 16px; align-items: center; }
+    .upload-btn { background: #1a1a2e; color: white; border: none; border-radius: 40px; padding: 8px 16px; font-weight: 500; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+    .install-btn { background: white; color: #1a1a2e; border: 1px solid #e8ecf3; border-radius: 40px; padding: 8px 16px; font-weight: 500; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 6px; }
     
     /* MAIN CONTENT */
     .main-content { padding: 24px 32px; max-width: 1400px; margin: 0 auto; }
-    
     .breadcrumb { color: #7c7c9e; font-size: 0.9rem; margin-bottom: 8px; }
     .page-title { font-size: 2rem; font-weight: 700; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
     .page-title i { color: #f59e0b; }
     
     /* CATEGORY CHIPS */
-    .category-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 28px;
-      border-bottom: 1px solid #e2e8f0;
-      padding-bottom: 16px;
-    }
-    
-    .category-chip {
-      background: white;
-      padding: 6px 16px;
-      border-radius: 40px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: #3d3d60;
-      border: 1px solid #e8ecf3;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    
+    .category-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; border-bottom: 1px solid #e2e8f0; padding-bottom: 16px; }
+    .category-chip { background: white; padding: 6px 16px; border-radius: 40px; font-size: 0.85rem; font-weight: 500; color: #3d3d60; border: 1px solid #e8ecf3; cursor: pointer; display: flex; align-items: center; gap: 6px; }
     .category-chip i { color: #7c7c9e; font-size: 0.75rem; }
-    .category-chip:hover { background: #f0f3fd; border-color: #2563eb; }
     
-    /* SOUND GRID - Myinstants exact layout */
-    .sound-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 12px;
-    }
+    /* SOUND GRID */
+    .sound-grid { display: flex; flex-direction: column; gap: 2px; background: #e8ecf3; border: 1px solid #e8ecf3; border-radius: 8px; overflow: hidden; }
     
+    /* EXACT MYINSTANTS CARD LAYOUT */
     .sound-card {
       background: white;
-      border-radius: 12px;
-      padding: 16px 8px 12px;
-      border: 1px solid #eef0f5;
-      text-align: center;
-      transition: all 0.1s;
-    }
-    
-    .sound-card:hover {
-      box-shadow: 0 4px 10px rgba(0,0,0,0.04);
-      border-color: #d0d9f0;
-    }
-    
-    .sound-icon {
-      width: 48px;
-      height: 48px;
-      background: #eef3ff;
-      border-radius: 14px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      margin: 0 auto 10px;
-      color: #2563eb;
-      font-size: 1.4rem;
+      padding: 8px 16px;
+      border-bottom: 1px solid #eef0f5;
+      transition: background 0.1s;
     }
     
-    .sound-name {
-      font-weight: 700;
-      font-size: 0.8rem;
-      line-height: 1.3;
-      margin-bottom: 10px;
-      word-break: break-word;
-      color: #1e1e32;
-      min-height: 36px;
-    }
+    .sound-card:last-child { border-bottom: none; }
+    .sound-card:hover { background: #f8faff; }
     
-    /* EXACT MYINSTANTS BUTTON */
+    /* Play button on left */
     .play-btn {
-      width: 38px;
-      height: 38px;
+      width: 36px;
+      height: 36px;
       background: #3b82f6;
       border: none;
       border-radius: 50%;
@@ -177,30 +61,58 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 8px;
+      margin-right: 14px;
       transition: all 0.15s;
+      flex-shrink: 0;
     }
     
-    .play-btn i { color: white; font-size: 0.9rem; }
+    .play-btn i { color: white; font-size: 0.85rem; }
     .play-btn:hover { background: #2563eb; transform: scale(1.05); }
     .play-btn.playing { background: #10b981; }
     
-    .sound-meta {
-      font-size: 0.65rem;
-      color: #8a8aa8;
+    /* Sound name - can wrap to 2 lines */
+    .sound-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #1e1e32;
+      flex: 1;
+      line-height: 1.3;
+      padding-right: 16px;
+    }
+    
+    /* Stats on right */
+    .sound-stats {
       display: flex;
-      justify-content: center;
-      gap: 10px;
+      align-items: center;
+      gap: 20px;
+      flex-shrink: 0;
+    }
+    
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #8a8aa8;
+      font-size: 0.8rem;
+      min-width: 55px;
+    }
+    
+    .stat-item i { color: #b0b0ce; font-size: 0.9rem; }
+    .stat-item .fa-heart { color: #ef4444; }
+    
+    /* More options dots */
+    .more-options {
+      color: #b0b0ce;
+      margin-left: 8px;
+      cursor: pointer;
+      font-size: 1.1rem;
     }
   </style>
 </head>
 <body>
-  <!-- TOP MENU - Exactly like Myinstants -->
+  <!-- TOP MENU -->
   <div class="top-menu">
-    <div class="logo">
-      <i class="fas fa-bolt"></i> Myinstants
-    </div>
-    
+    <div class="logo"><i class="fas fa-bolt"></i> Myinstants</div>
     <div class="menu-items">
       <span class="menu-item active"><i class="fas fa-home"></i> Home</span>
       <span class="menu-item"><i class="fas fa-clock"></i> Just added</span>
@@ -208,11 +120,8 @@
       <span class="menu-item"><i class="fas fa-dragon"></i> Anime</span>
       <span class="menu-item"><i class="fas fa-gamepad"></i> Games</span>
       <span class="menu-item"><i class="fas fa-laugh-squint"></i> Memes</span>
-      <span class="menu-item"><i class="fas fa-film"></i> Movies</span>
-      <span class="menu-item"><i class="fas fa-music"></i> Music</span>
       <span class="menu-item"><i class="fas fa-fire"></i> Viral</span>
     </div>
-    
     <div class="user-section">
       <span class="install-btn"><i class="fas fa-download"></i> Install app</span>
       <span class="upload-btn"><i class="fas fa-cloud-upload-alt"></i> Upload</span>
@@ -227,9 +136,7 @@
       <span style="font-weight: 500;">Trending in Pakistan</span>
     </div>
     
-    <div class="page-title">
-      <i class="fas fa-fire"></i> Trending in Pakistan 🇵🇰
-    </div>
+    <div class="page-title"><i class="fas fa-fire"></i> Trending in Pakistan 🇵🇰</div>
     
     <div class="category-row">
       <span class="category-chip"><i class="fas fa-gamepad"></i> Games</span>
@@ -246,7 +153,7 @@
       <span class="category-chip"><i class="fab fa-whatsapp"></i> WhatsApp</span>
     </div>
 
-    <!-- SOUND GRID -->
+    <!-- SOUND LIST - Exact Myinstants layout -->
     <div class="sound-grid" id="soundGrid"></div>
   </div>
 
@@ -254,9 +161,13 @@
     const sounds = [
       "FAHHHHHHHHHHHHHH", "FAAAH", "Chicken on tree screaming", "VINE BOOM SOUND",
       "anime ahh", "GopGopGop", "Fart", "Tum Dum Tedau", "Fahhh",
-      "Among Us role reveal sound", "Anime Wow", "Sad Violin", "Bone Crack",
-      "Shocked sound", "Tuco: GET OUT", "HAha funny laugh", "rizz sound effect",
-      "spiderman meme song", "Dexter meme", "CID LE MDC", "Chalo", "Acha ji"
+      "Among Us role reveal sound", "Anime Wow", "Mka ladle meow gop.",
+      "Matlab wo alag hi level ka banda tha", "Bhosdike madarchod been k loray - roadies",
+      "CID LE MDC", "Chalo", "romanceeeeeeeeeeeeee", "I've Got This FAAAAAAAAAHHHHH",
+      "Sad Violin (the meme one)", "Dexter meme", "Lund pakad ke tarazu ki tarah cid",
+      "teri gand mari", "Ab tu Gaya beta ab dekh tu (puneet", "sparrowusa24 ouch",
+      "rizz sound effect", "Acha ji aisa hai kya", "Bone Crack", "spiderman meme song",
+      "dun dun dunnnnnnnn", "HAha funny laugh", "Shocked sound", "Tuco: GET OUT"
     ];
 
     let currentButton = null;
@@ -294,10 +205,10 @@
       osc.type = ['triangle', 'sawtooth', 'square'][Math.abs(hash) % 3];
       
       gain.gain.setValueAtTime(0.15, audioContext.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.35);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.4);
       
       osc.connect(gain); gain.connect(audioContext.destination);
-      osc.start(); currentOsc = osc; osc.stop(audioContext.currentTime + 0.35);
+      osc.start(); currentOsc = osc; osc.stop(audioContext.currentTime + 0.4);
       
       button.classList.add('playing');
       button.innerHTML = '<i class="fas fa-pause"></i>';
@@ -315,17 +226,20 @@
       let html = '';
       
       sounds.forEach((name) => {
+        const plays = Math.floor(Math.random() * 50000) + 1000;
+        const likes = Math.floor(Math.random() * 5000) + 100;
+        
         html += `
           <div class="sound-card">
-            <div class="sound-icon"><i class="fas fa-volume-up"></i></div>
-            <div class="sound-name">${name}</div>
             <button class="play-btn" data-name="${name.replace(/"/g, '&quot;')}">
               <i class="fas fa-play"></i>
             </button>
-            <div class="sound-meta">
-              <span><i class="far fa-play-circle"></i> ${Math.floor(Math.random()*5000)+500}</span>
-              <span><i class="far fa-heart"></i> ${Math.floor(Math.random()*300)+20}</span>
+            <div class="sound-name">${name}</div>
+            <div class="sound-stats">
+              <span class="stat-item"><i class="fas fa-play"></i> ${plays >= 1000 ? (plays/1000).toFixed(1) + 'k' : plays}</span>
+              <span class="stat-item"><i class="fas fa-heart"></i> ${likes >= 1000 ? (likes/1000).toFixed(0) + 'k' : likes}</span>
             </div>
+            <span class="more-options">⋯</span>
           </div>
         `;
       });
