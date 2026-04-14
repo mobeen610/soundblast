@@ -11,7 +11,7 @@
     body { font-family: 'Inter', sans-serif; background: #f5f7fb; color: #1e1e2a; }
     .app-wrapper { display: flex; min-height: 100vh; }
     
-    /* SIDEBAR - Exact Myinstants style */
+    /* SIDEBAR */
     .sidebar { width: 260px; background: white; border-right: 1px solid #e8ecf3; padding: 20px 12px; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
     .logo { font-size: 1.5rem; font-weight: 700; padding: 8px 12px 20px; color: #1a1a2e; }
     .nav-section { display: flex; flex-direction: column; gap: 2px; margin-bottom: 16px; }
@@ -32,32 +32,70 @@
     .breadcrumb { color: #7c7c9e; font-size: 0.9rem; margin-bottom: 8px; }
     .page-title { font-size: 2rem; font-weight: 700; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
     .page-title i { color: #f59e0b; }
-    
-    /* CATEGORY CHIPS */
     .category-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 28px; border-bottom: 1px solid #e2e8f0; padding-bottom: 16px; }
     .category-chip { background: white; padding: 6px 16px; border-radius: 40px; font-size: 0.85rem; font-weight: 500; color: #3d3d60; border: 1px solid #e8ecf3; cursor: pointer; }
     
-    /* SOUND GRID - Matching Myinstants exactly */
+    /* SOUND GRID */
     .sound-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
     .sound-card { background: white; border-radius: 14px; padding: 18px 12px 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); border: 1px solid #eaecf3; text-align: center; transition: all 0.15s; }
     .sound-card:hover { box-shadow: 0 6px 14px rgba(0,0,0,0.04); border-color: #d0d9f0; }
     .sound-icon { background: #f0f5ff; width: 52px; height: 52px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; color: #2563eb; font-size: 1.5rem; }
     .sound-name { font-weight: 700; font-size: 0.9rem; line-height: 1.3; margin-bottom: 12px; word-break: break-word; color: #1e1e32; min-height: 40px; }
     
-    /* PLAY BUTTON - Exactly like Myinstants */
-    .play-btn { background: #2563eb; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; transition: all 0.15s; }
-    .play-btn:hover { background: #1d4ed8; transform: scale(1.05); }
-    .play-btn.playing { background: #10b981; animation: pulse 1s infinite; }
-    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+    /* EXACT MYINSTANTS BUTTON STYLE */
+    .play-btn {
+      width: 44px;
+      height: 44px;
+      background: #3b82f6;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 8px;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .play-btn i {
+      color: white;
+      font-size: 1.2rem;
+      margin-left: 2px;
+    }
+    
+    .play-btn:hover {
+      background: #2563eb;
+      transform: scale(1.08);
+      box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+    }
+    
+    .play-btn:active {
+      transform: scale(0.95);
+    }
+    
+    .play-btn.playing {
+      background: #10b981;
+      animation: playingPulse 1.2s infinite;
+    }
+    
+    .play-btn.playing i {
+      content: "\f04c";
+    }
+    
+    @keyframes playingPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+      50% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+    }
     
     .sound-meta { font-size: 0.7rem; color: #8a8aa8; display: flex; justify-content: center; gap: 14px; }
     .footer-note { margin-top: 48px; text-align: center; color: #9090b0; font-size: 0.85rem; border-top: 1px solid #e2e8f0; padding-top: 24px; }
+    .footer-note a { color: #2563eb; text-decoration: none; }
     audio { display: none; }
   </style>
 </head>
 <body>
 <div class="app-wrapper">
-  <!-- SIDEBAR -->
   <div class="sidebar">
     <div class="logo"><i class="fas fa-bolt"></i> Myinstants</div>
     <div class="nav-section">
@@ -95,7 +133,6 @@
     <div class="install-app"><i class="fas fa-download"></i> Install app</div>
   </div>
 
-  <!-- MAIN CONTENT -->
   <div class="main-content">
     <div class="top-bar">
       <div class="user-icons">
@@ -125,7 +162,6 @@
       <span class="category-chip"><i class="fab fa-whatsapp"></i> Whatsapp Audios</span>
     </div>
 
-    <!-- SOUND GRID -->
     <div class="sound-grid" id="soundGrid"></div>
     <audio id="audioPlayer"></audio>
     <div class="footer-note">Built by <a href="https://github.com/mobeen610">mobeen610</a></div>
@@ -133,57 +169,73 @@
 </div>
 
 <script>
-  // ============================================
-  // REPLACE THESE URLs WITH YOUR ACTUAL FILES
-  // ============================================
   const sounds = [
-    { name: "FAHHHHHHHHHHHHHH", file: "fahhhhh.mp3" },
-    { name: "FAAAH", file: "faaah.mp3" },
-    { name: "Chicken on tree screaming", file: "chicken-tree.mp3" },
-    { name: "VINE BOOM SOUND", file: "vine-boom.mp3" },
-    { name: "anime ahh", file: "anime-ahh.mp3" },
-    { name: "GopGopGop", file: "gopgopgop.mp3" },
-    { name: "Fart", file: "fart.mp3" },
-    { name: "Tum Dum Tedau", file: "tum-dum.mp3" },
-    { name: "Fahhh", file: "fahhh-short.mp3" },
-    { name: "Among Us role reveal sound", file: "among-us.mp3" },
-    { name: "Anime Wow", file: "anime-wow.mp3" },
-    { name: "Mka ladle meow gop.", file: "mka-ladle.mp3" },
-    { name: "Sad Violin (the meme one)", file: "sad-violin.mp3" },
-    { name: "Bone Crack", file: "bone-crack.mp3" },
-    { name: "Shocked sound", file: "shocked.mp3" },
-    { name: "Tuco: GET OUT", file: "tuco.mp3" }
+    "FAHHHHHHHHHHHHHH", "FAAAH", "Chicken on tree screaming", "VINE BOOM SOUND",
+    "anime ahh", "GopGopGop", "Fart", "Tum Dum Tedau", "Fahhh",
+    "Among Us role reveal sound", "Anime Wow", "Mka ladle meow gop.",
+    "Matlab wo alag hi level ka banda tha", "Bhosdike madarchod been k loray - roadies",
+    "CID LE MDC", "Chalo", "romanceeeeeeeeeeeeee", "I've Got This FAAAAAAAAAHHHHH",
+    "Sad Violin (the meme one)", "Dexter meme", "Lund pakad ke tarazu ki tarah cid",
+    "teri gand mari", "Ab tu Gaya beta ab dekh tu (puneet", "sparrowusa24 ouch",
+    "rizz sound effect", "Acha ji aisa hai kya", "Bone Crack", "spiderman meme song",
+    "dun dun dunnnnnnnn", "HAha funny laugh", "Shocked sound", "Tuco: GET OUT"
   ];
 
   let currentAudio = null;
   let currentButton = null;
+  let audioContext = null;
 
-  function playSound(fileName, button) {
-    const audio = document.getElementById('audioPlayer');
-    
-    // Stop current audio
-    if (currentAudio) {
-      currentAudio.pause();
-      currentAudio.currentTime = 0;
+  function initAudio() {
+    if (!audioContext) {
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
     }
+    if (audioContext.state === 'suspended') {
+      audioContext.resume();
+    }
+  }
+
+  function playSound(soundName, button) {
+    initAudio();
+    if (!audioContext) return;
     
-    // Remove playing state
+    if (currentAudio) {
+      try { currentAudio.stop(); } catch(e) {}
+    }
     if (currentButton) {
       currentButton.classList.remove('playing');
+      currentButton.innerHTML = '<i class="fas fa-play"></i>';
     }
     
-    // Set and play new audio
-    audio.src = `audio/${fileName}`;
-    audio.play();
-    currentAudio = audio;
+    const osc = audioContext.createOscillator();
+    const gain = audioContext.createGain();
     
-    // Mark button as playing
+    let hash = 0;
+    for (let i = 0; i < soundName.length; i++) {
+      hash = ((hash << 5) - hash) + soundName.charCodeAt(i);
+    }
+    
+    osc.frequency.value = 350 + Math.abs(hash % 450);
+    osc.type = ['triangle', 'sawtooth', 'square'][Math.abs(hash) % 3];
+    
+    gain.gain.setValueAtTime(0.15, audioContext.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.4);
+    
+    osc.connect(gain);
+    gain.connect(audioContext.destination);
+    
+    osc.start();
+    currentAudio = osc;
+    osc.stop(audioContext.currentTime + 0.4);
+    
     button.classList.add('playing');
+    button.innerHTML = '<i class="fas fa-pause"></i>';
     currentButton = button;
     
-    audio.onended = () => {
+    osc.onended = () => {
       button.classList.remove('playing');
+      button.innerHTML = '<i class="fas fa-play"></i>';
       currentButton = null;
+      currentAudio = null;
     };
   }
 
@@ -191,17 +243,20 @@
     const grid = document.getElementById('soundGrid');
     
     let html = '';
-    sounds.forEach((sound) => {
+    sounds.forEach((name) => {
+      const plays = Math.floor(Math.random() * 5000) + 500;
+      const likes = Math.floor(Math.random() * 300) + 20;
+      
       html += `
         <div class="sound-card">
           <div class="sound-icon"><i class="fas fa-volume-up"></i></div>
-          <div class="sound-name">${sound.name}</div>
-          <button class="play-btn" data-file="${sound.file}">
+          <div class="sound-name">${name}</div>
+          <button class="play-btn" data-name="${name.replace(/"/g, '&quot;')}">
             <i class="fas fa-play"></i>
           </button>
           <div class="sound-meta">
-            <span><i class="far fa-play-circle"></i> 1.2k</span>
-            <span><i class="far fa-heart"></i> 89</span>
+            <span><i class="far fa-play-circle"></i> ${plays}</span>
+            <span><i class="far fa-heart"></i> ${likes}</span>
           </div>
         </div>
       `;
@@ -212,11 +267,12 @@
     document.querySelectorAll('.play-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
-        playSound(btn.dataset.file, btn);
+        playSound(btn.dataset.name, btn);
       });
     });
   }
 
+  document.body.addEventListener('click', () => { initAudio(); }, { once: true });
   renderGrid();
 </script>
 </body>
